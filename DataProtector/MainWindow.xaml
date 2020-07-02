@@ -1,0 +1,178 @@
+﻿<Window x:Class="DataProtector.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Initialized="Window_Initialized"
+        Title="Защитник данных" Height="450" Width="800" ResizeMode="CanMinimize">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Работа с изображениями">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="5">
+                        <TextBlock Text="Выбор исходного изображения"></TextBlock>
+                        <Border Height="300" Width="300" Margin="10" BorderThickness="1" BorderBrush="Gray" >
+                            <Image x:Name="previewImage" />
+                        </Border>
+                        <Button Content="Выбрать изображение" Width="130" Margin="10" Height="28" Click="ChooseImageButton_Click" Background="#FFB178FF"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="5">
+                        <TextBlock Text="Выбор водяного знака"/>
+                        <Border Height="120" Width="120" Margin="10" BorderThickness="1" BorderBrush="Gray">
+                            <Image x:Name="previewWatermark"/>
+                        </Border>
+                        <Button Content="Выбрать изображение" Width="130" Height="28" Click="ChooseWatermarkButton_Click" Background="#FFB178FF"/>
+                    </StackPanel>
+
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="auto" ></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel>
+                            <TextBlock Text="Выбор положения водяного знака"/>
+                            <RadioButton Content="Слева сверху" Margin="0 10 0 0" Name="TopLeftRadioButton" IsChecked="True" />
+                            <RadioButton Content="Справа сверху" Name="TopRightRadioButton" />
+                            <RadioButton Content="Слева снизу" Name="BottomLeftRadioButton" />
+                            <RadioButton Content="Справа снизу" Name="BottomRightRadioButton" />
+                            <RadioButton Content="По центру" Name="CenterRadioButton" />
+                        </StackPanel>
+
+                        <WrapPanel Grid.Row="1">
+                            <TextBlock Text="Выбор прозрачности" />
+                            <TextBox x:Name="OpacityValueTextBox" Width="50" Text="100" Margin="10 0 0 0" />
+                        </WrapPanel>
+
+                        <GroupBox Grid.Row="2" Header="Подсказка" Margin="5">
+                            <TextBlock Margin="5" Text="Прозрачность в процентах, где 100 - изображение непрозрачное, 0 - изображение прозрачно" Width="auto" TextWrapping="Wrap"/>
+                        </GroupBox>
+                        <Button Grid.Row="3" Width="100" Height="28" Content="Применить" Background="#FFB178FF" Click="DrawOnImageButton_Click"/>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Работа с документами">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.3*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Margin="5">
+                            <TextBlock Text="Выбор водяного знака"></TextBlock>
+                            <Border Height="120" Width="120" Margin="10" BorderThickness="1" BorderBrush="Gray">
+                                <Image x:Name="previewWatermark2" ></Image>
+                            </Border>
+                            <Button Content="Выбрать изображение" Width="130" Height="28" Click="ChooseWatermarkButton2_Click" Background="#FFB178FF"></Button>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Margin="0 10 0 0">
+                            <WrapPanel Grid.Row="2" Margin="0 10 0 0">
+                                <TextBlock Text="Выбор прозрачности" />
+                                <TextBox x:Name="OpacityValueTextBox2" Width="50" Margin="10 0 0 0" Text="100" />
+                            </WrapPanel>
+                            <GroupBox Grid.Row="3" Header="Подсказка" Margin="5">
+                                <TextBlock Margin="5" Text="Прозрачность в процентах, где 100 - изображение непрозрачное, 0 - изображение прозрачно" Width="auto" TextWrapping="Wrap"/>
+                            </GroupBox>
+                        </StackPanel>
+                    </Grid>
+
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto" ></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+
+                        </StackPanel>
+                        <StackPanel Margin="0 10 0 0">
+                            <TextBlock Text="Выбор расширения документа"/>
+                            <RadioButton Content="DOCX" Margin="0 10 0 0" Name="DOCXRadioButton" Checked="DOCXRadioButton_Checked"/>
+                            <RadioButton Content="PDF" Name="PDFRadioButton" Checked="PDFRadioButton_Checked"/>
+                            <RadioButton Content="XLSX" Name="XLSXRadioButton" Checked="XLSXRadioButton_Checked" Unchecked="XLSXRadioButton_Unchecked"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Margin="0 10 0 0">
+                            <TextBlock Text="Выбор документа"/>
+                            <WrapPanel Margin="5">
+                                <TextBox Width="200" x:Name="FileTextBox"/>
+                                <Button Width="20" Margin="10 0 0 0" Background="#FFB178FF" Name="OpenFileButton" Click="OpenFileButton_Click">
+                                    <Image Source="/Resources/open_folder.png" />
+                                </Button>
+                            </WrapPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Margin="0 10 0 0">
+                            <TextBlock Text="Пароль для листа"/>
+                            <TextBox Margin="5" Width="200" HorizontalAlignment="Left" IsEnabled="False" Name="excelpassTextBox"/>
+                        </StackPanel>
+
+
+                    </Grid>
+                    <Grid Grid.Column="2" Margin="0 10 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Выбор места сохранения файла"/>
+                            <WrapPanel Margin="5">
+                                <TextBox Width="200" x:Name="SaveDirectoryTextBox"/>
+                                <Button Width="20" Margin="10 0 0 0" Background="#FFB178FF" Name="OpenSaveDirectoryButton" Click="OpenSaveDirectoryButton_Click">
+                                    <Image Source="/Resources/open_folder.png" />
+                                </Button>
+                            </WrapPanel>
+                        </StackPanel>
+                        <Button Grid.Row="1" Height="30" Width="120" Background="#FFB178FF" Content="Применить" Name="DocumentManageButton" Click="DocumentManageButton_Click"/>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Настройки">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <CheckBox Margin="0 5 0 0" Content="Делать копии исходных изображений (Может занимать много места!)" Name="copyImageCheckBox" Checked="copyImageCheckBox_Checked" Unchecked="copyImageCheckBox_Unchecked" IsChecked="True"/>
+                    <CheckBox Margin="0 10 0 0" Grid.Row="1" Content="Записывать действия в файл логов" Name="logCheckBox" Checked="logCheckBox_Checked" Unchecked="logCheckBox_Unchecked" IsChecked="True" />
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="О программе">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="/Resources/logo.png" Height="250" />
+
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Text="Данное ПО разработано Анисимовым Максимом. Является дипломным проектом. Позволяет накладывать " HorizontalAlignment="Stretch" TextWrapping="Wrap" Width="600" Foreground="Gray"/>
+                        <TextBlock Text="водяные знаки на изображения и документы различных форматов." HorizontalAlignment="Center" Foreground="Gray" />
+                        <TextBlock Text="2020" HorizontalAlignment="Center" Foreground="Gray"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
