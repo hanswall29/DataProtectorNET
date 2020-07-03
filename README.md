@@ -1,6 +1,6 @@
 # DataProtector NET
 
-My graduation work. Simple program that allows you to apply image watermark on images and documents of various formats. Used solution for documents is Spire.Office by E-Iceblue (https://www.e-iceblue.com/Introduce/spire-office-for-net.html)
+My graduation project. Simple program that allows you to apply image watermark on images and documents of various formats. Used solution for documents is Spire.Office by E-Iceblue (https://www.e-iceblue.com/Introduce/spire-office-for-net.html)
 
 # What can you do?
 - you can apply image watermarks on other images;
